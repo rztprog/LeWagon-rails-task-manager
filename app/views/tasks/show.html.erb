@@ -1,0 +1,21 @@
+<h1> <%= @task.title %> </h1>
+
+<div class="alert alert-info">
+  <p><%= @task.details %></p>
+</div>
+<p><%= @task.completed ? "This task is completed" : "This task is not completed yet" %></p>
+
+<%= link_to task_path(@task),
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-danger" do %>
+            <i class="far fa-trash-alt"> Delete <%= @task.title %></i>
+<% end %>
+
+<%= link_to edit_task_path, class: "btn btn-primary" do %>
+ <i class="far fa-edit"> Edit</i>
+<% end %>
+
+<%= link_to tasks_path, class: "btn btn-light " do %>
+  <i class="fas fa-undo-alt"> Back to list</i>
+<% end %>

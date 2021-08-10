@@ -1,0 +1,20 @@
+<h1>Tasks</h1>
+
+<ul class="list-group">
+  <% @tasks.each do |task| %>
+    <li class="d-flex list-custom mt-1"><%= link_to task_path(task), class: "list-group-item w-100" do %>
+    <%= task.title %>
+    <% end %>
+          <%= link_to task_path(task),
+            method: :delete,
+            data: { confirm: "Are you sure?" },
+            class: "btn btn-danger" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to new_task_path, class: "btn btn-light mt-2" do %>
+  <i class="fas fa-plus"> Add a new task</i>
+<% end %>
