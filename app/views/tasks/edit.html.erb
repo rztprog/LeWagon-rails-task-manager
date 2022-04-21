@@ -3,9 +3,15 @@
 <%= simple_form_for(@task) do |f| %>
   <%= f.input :title %>
   <%= f.input :details %>
-  <%= f.submit class: "btn btn-success mt-2"%>
-<% end %>
+  <p>
+    <%= f.check_box :completed, as: :boolean %>
+    Check if this task is completed !
+  </p>
+<div>
+    <%= f.submit class: "btn btn-success mt-2"%>
+  <% end %>
 
-<%= link_to tasks_path,  class: "btn btn-light mt-2" do %>
-  <i class="fas fa-undo-alt"> Back to list</i>
-<% end %>
+  <%= link_to root_path, class: "btn btn-secondary mt-2" do %>
+    <i class="fas fa-undo-alt"> Back to list</i>
+  <% end %>
+</div>

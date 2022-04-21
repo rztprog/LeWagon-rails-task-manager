@@ -1,13 +1,16 @@
 <h1>Tasks</h1>
 
-<ul class="list-group">
+<ul class="list-group" data-controller='tasks'>
   <% @tasks.each do |task| %>
-    <li class="d-flex list-custom mt-2"><%= link_to task_path(task), class: "list-group-item w-100" do %>
+    <li class="d-flex list-custom mt-2" data-tasks-target="task"><%= link_to task_path(task), 
+    class: (task.completed.to_s == "true") ? "list-group-item w-100 completed" : "list-group-item w-100" do %>
+      
       <%= task.title %>
+      <p class="d-none" data-tasks-target="completed"><%= task.completed %></p>
       <% end %>
         <%= link_to task_path(task),
           method: :delete,
-          data: { confirm: "Are you sure you want to delete ?" },
+          data: { confirm: "Are you sure you want to delete #{task.title}?" },
           class: "btn btn-danger" do 
         %>
         <i class="far fa-trash-alt"></i>
@@ -16,6 +19,12 @@
   <% end %>
 </ul>
 
-<%= link_to new_task_path, class: "btn btn-light mt-2" do %>
+<%= link_to new_task_path, class: "btn btn-primary mt-4" do %>
   <i class="fas fa-plus"> Add a new task</i>
+<% end %>
+
+<%= link_to delete_all_path, class: "btn btn-danger mt-4", 
+      method: :delete,
+      data: { confirm: "Are you sure you want to delete all?" } do %>
+  <i class="far fa-trash-alt"> Delete all</i>
 <% end %>

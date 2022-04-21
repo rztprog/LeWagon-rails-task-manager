@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order("id DESC").all
   end
 
   def show
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update(task_params)
-    redirect_to task_path(@task)
+    redirect_to root_path()
   end
 
   def destroy
@@ -31,10 +31,15 @@ class TasksController < ApplicationController
     redirect_to root_path()
   end
 
+  def destroy_all
+    Task.destroy_all
+    redirect_to root_path()
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:title, :details)
+    params.require(:task).permit(:title, :details, :completed)
   end
 
   def set_task
